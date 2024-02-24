@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreMarcaRequest;
+use App\Http\Requests\UpdateMarcaRequest;
+use Illuminate\Validation\ValidationException;
 
 class MarcaController extends Controller
 {
@@ -20,12 +22,13 @@ class MarcaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreMarcaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMarcaRequest $request)
     {
-        //
+        $marca = Marca::create($request->validated());
+        return response()->json($marca, 201);
     }
 
     /**
@@ -42,11 +45,11 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateMarcaRequest  $request
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Marca $marca)
+    public function update(UpdateMarcaRequest $request, Marca $marca)
     {
         //
     }
