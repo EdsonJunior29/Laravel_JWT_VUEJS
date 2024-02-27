@@ -3,7 +3,7 @@
 namespace Tests\Services;
 
 use App\Models\Marca;
-use App\Repositories\MarcaRepository;
+use App\Repositories\Interfaces\MarcaInterface;
 use App\Services\MarcaService;
 use PHPUnit\Framework\TestCase;
 
@@ -11,12 +11,12 @@ class MarcaServiceTest extends TestCase
 {
     public function testCriaMarca()
     {
-        $repoMock = $this->getMockBuilder(MarcaRepository::class)
+        $repoMock = $this->getMockBuilder(MarcaInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         
         $repoMock->expects($this->once())
-            ->method('createMarca')
+            ->method('create')
             ->with(['nome' => 'Bugatti', 'imagem' => 'imagem_bugatti.jpg'])
             ->willReturn(new Marca(['id' => 5, 'nome' => 'Bugatti', 'imagem' => 'imagem_bugatti.jpg']));
 
@@ -31,11 +31,11 @@ class MarcaServiceTest extends TestCase
 
     public function testErroAoCriarMarcaLancaException()
     {
-        $repoMock = $this->getMockBuilder(MarcaRepository::class)
+        $repoMock = $this->getMockBuilder(MarcaInterface::class)
                          ->disableOriginalConstructor()
                          ->getMock();
 
-        $repoMock->method('createMarca')
+        $repoMock->method('create')
                  ->willThrowException(new \Exception('Erro ao criar marca'));
 
         $service = new MarcaService($repoMock);

@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateMarcaRequest;
 use App\Repositories\MarcaRepository;
 use App\Services\MarcaService;
 use Exception;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
 
 class MarcaController extends Controller
 {
