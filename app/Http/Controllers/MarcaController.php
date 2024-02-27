@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Marca;
 use App\Http\Requests\StoreMarcaRequest;
 use App\Http\Requests\UpdateMarcaRequest;
+use App\Repositories\MarcaRepository;
+use App\Services\MarcaService;
+use Exception;
 use Illuminate\Validation\ValidationException;
 
 class MarcaController extends Controller
@@ -27,7 +30,15 @@ class MarcaController extends Controller
      */
     public function store(StoreMarcaRequest $request)
     {
-        $marca = Marca::create($request->validated());
+        $marcaRepository = new MarcaRepository();
+        $marcaService = new MarcaService($marcaRepository);
+
+        try {
+            $marca = $marcaService->criaMarca($request->validated());
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), $e->getCode());
+        }
+        
         return response()->json($marca, 201);
     }
 
