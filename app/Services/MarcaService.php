@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\MarcaInterface;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class MarcaService
@@ -19,6 +20,7 @@ class MarcaService
         try {
            $marcaCriada =  $this->marcaInterface->create($dados);
         } catch (\Throwable $th) {
+            Log::error('Erro ao criar marca: ' . $th->getMessage());
             throw new Exception($th->getMessage(), $th->getCode());
         }
         return $marcaCriada;

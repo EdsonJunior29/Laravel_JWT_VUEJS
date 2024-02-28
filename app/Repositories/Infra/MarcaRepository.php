@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Infra;
 
 use App\Models\Marca;
 use App\Repositories\Interfaces\MarcaInterface;

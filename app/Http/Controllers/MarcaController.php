@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Marca;
 use App\Http\Requests\StoreMarcaRequest;
 use App\Http\Requests\UpdateMarcaRequest;
-use App\Repositories\MarcaRepository;
 use App\Services\MarcaService;
 use Exception;
-use Illuminate\Database\QueryException;
 
 class MarcaController extends Controller
 {
+    protected $marcaService;
+
+    public function __construct(MarcaService $marcaService)
+    {
+        $this->marcaService = $marcaService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +23,7 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        //
+        return 'index';
     }
 
     /**
@@ -30,15 +34,11 @@ class MarcaController extends Controller
      */
     public function store(StoreMarcaRequest $request)
     {
-        $marcaRepository = new MarcaRepository();
-        $marcaService = new MarcaService($marcaRepository);
-
         try {
-            $marca = $marcaService->criaMarca($request->validated());
+            $marca = $this->marcaService->criaMarca($request->validated());
         } catch (Exception $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }
-        
         return response()->json($marca, 201);
     }
 

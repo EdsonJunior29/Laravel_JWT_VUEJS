@@ -5,6 +5,7 @@ namespace Tests\Services;
 use App\Models\Marca;
 use App\Repositories\Interfaces\MarcaInterface;
 use App\Services\MarcaService;
+use Illuminate\Support\Facades\Log;
 use PHPUnit\Framework\TestCase;
 
 class MarcaServiceTest extends TestCase
@@ -31,6 +32,10 @@ class MarcaServiceTest extends TestCase
 
     public function testErroAoCriarMarcaLancaException()
     {
+        Log::shouldReceive('error')
+            ->once()
+            ->with('Erro ao criar marca', []);
+
         $repoMock = $this->getMockBuilder(MarcaInterface::class)
                          ->disableOriginalConstructor()
                          ->getMock();
