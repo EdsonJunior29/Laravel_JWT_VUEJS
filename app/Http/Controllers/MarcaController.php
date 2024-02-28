@@ -23,7 +23,12 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        return 'index';
+        try {
+            $marcas = $this->marcaService->buscarTodasAsMarcas();
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), $e->getCode());
+        }
+        return response()->json( $marcas, 200);
     }
 
     /**
@@ -50,7 +55,14 @@ class MarcaController extends Controller
      */
     public function show(Marca $marca)
     {
-        //
+        try {
+            $marcaDados = $this->marcaService->buscarMarcaPorId($marca);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), $e->getCode());
+        }
+       
+        return response()->json($marcaDados, 200);
+
     }
 
     /**

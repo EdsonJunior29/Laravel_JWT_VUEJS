@@ -14,6 +14,16 @@ class MarcaRepository implements MarcaInterface
         $this->marca = $marca;
     }
 
+    public function getAll()
+    {
+        return $this->marca->all();
+    }
+
+    public function getById($marca)
+    {
+        return $marca;
+    }
+
     public function create(array $dados): Marca
     {
         return $this->marca->create($dados);
