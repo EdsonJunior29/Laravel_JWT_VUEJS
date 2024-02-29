@@ -23,8 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('marca')->group(function () {
+    Route::get('', [MarcaController::class, 'index']);
+    Route::get('/{id}', [MarcaController::class, 'show']);
+    Route::post('', [MarcaController::class, 'store']);
+    Route::put('/{id}', [MarcaController::class, 'update']);
+});
+
 Route::apiResource('carro', CarroController::class);
 Route::apiResource('cliente', ClienteController::class);
 Route::apiResource('locacao', LocacaoController::class);
-Route::apiResource('marca', MarcaController::class);
 Route::apiResource('modelo', ModeloController::class);

@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\JsonResponse;
 
 class UpdateMarcaRequest extends FormRequest
 {
@@ -13,7 +16,7 @@ class UpdateMarcaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +27,25 @@ class UpdateMarcaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => ['required','unique:marcas,nome','string','max:30'],
+            'imagem' => ['required','string','max:100']
         ];
+    }
+    
+    public function messages()
+    {
+        return [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.unique' => 'O nome já está em uso.',
+            'nome.max' => 'O campo nome deve ter no máximo :max caracteres.',
+            'imagem.required' => 'O campo imagem é obrigatório.',
+            'imagem.max' => 'O campo imagem deve ter no máximo :max caracteres.'
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $response = new JsonResponse(['errors' => $validator->errors()], 422);
+        throw new HttpResponseException($response);
     }
 }

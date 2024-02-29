@@ -19,13 +19,23 @@ class MarcaRepository implements MarcaInterface
         return $this->marca->all();
     }
 
-    public function getById($marca)
+    public function getById(int $id)
     {
-        return $marca;
+        return $this->marca->find($id);
     }
 
     public function create(array $dados): Marca
     {
         return $this->marca->create($dados);
+    }
+
+    public function updateById(array $dados, int $marcaId)
+    {
+        $marca = $this->getById($marcaId);
+
+        $marca->nome = $dados['nome'];
+        $marca->imagem = $dados['imagem'];
+        
+        $marca->update();
     }
 }

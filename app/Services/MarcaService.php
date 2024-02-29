@@ -28,10 +28,10 @@ class MarcaService
          return $marcas;
     }
 
-    public function buscarMarcaPorId(Marca $marca)
+    public function buscarMarcaPorId(int $marcaId)
     {
         try {
-            return $this->marcaInterface->getById($marca);
+            return $this->marcaInterface->getById($marcaId);
          } catch (\Throwable $th) {
             Log::error('Erro ao criar marca: ' . $th->getMessage());
             throw new Exception($th->getMessage(), $th->getCode());
@@ -48,5 +48,14 @@ class MarcaService
             throw new Exception($th->getMessage(), $th->getCode());
         }
         return $marcaCriada;
+    }
+
+    public function atualizaMarca(array $dados, int $id)
+    {
+        try {
+            $this->marcaInterface->updateById($dados, $id);
+         } catch (\Throwable $th) {
+             throw new Exception($th->getMessage(), $th->getCode());
+         }
     }
 }

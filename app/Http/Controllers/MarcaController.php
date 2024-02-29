@@ -53,10 +53,10 @@ class MarcaController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function show(Marca $marca)
+    public function show(int $id)
     {
         try {
-            $marcaDados = $this->marcaService->buscarMarcaPorId($marca);
+            $marcaDados = $this->marcaService->buscarMarcaPorId($id);
         } catch (Exception $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }
@@ -72,9 +72,14 @@ class MarcaController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMarcaRequest $request, Marca $marca)
+    public function update(UpdateMarcaRequest $request, int $id)
     {
-        //
+       try {
+            $this->marcaService->atualizaMarca($request->validated(), $id);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), $e->getCode());
+        }
+        return response()->json('update successfully', 201);
     }
 
     /**

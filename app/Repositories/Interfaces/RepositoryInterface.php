@@ -10,5 +10,7 @@ interface RepositoryInterface
 
     public function getAll();
 
-    public function getById(Model $model);
+    public function getById(int $modelId);
+
+    public function updateById(array $dados, int $modelId);
 }
