@@ -27,7 +27,7 @@ class UpdateMarcaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required','unique:marcas,nome','string','max:30'],
+            'nome' => ['required','string','max:30'],
             'imagem' => ['required','string','max:100']
         ];
     }
@@ -36,7 +36,6 @@ class UpdateMarcaRequest extends FormRequest
     {
         return [
             'nome.required' => 'O campo nome é obrigatório.',
-            'nome.unique' => 'O nome já está em uso.',
             'nome.max' => 'O campo nome deve ter no máximo :max caracteres.',
             'imagem.required' => 'O campo imagem é obrigatório.',
             'imagem.max' => 'O campo imagem deve ter no máximo :max caracteres.'
