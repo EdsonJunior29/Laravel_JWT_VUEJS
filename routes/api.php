@@ -28,6 +28,7 @@ Route::prefix('marca')->group(function () {
     Route::get('/{id}', [MarcaController::class, 'show']);
     Route::post('', [MarcaController::class, 'store']);
     Route::put('/{id}', [MarcaController::class, 'update']);
+    Route::delete('/{id}', [MarcaController::class, 'destroy']);
 });
 
 Route::apiResource('carro', CarroController::class);

@@ -38,4 +38,11 @@ class MarcaRepository implements MarcaInterface
         
         $marca->update();
     }
+
+    public function deleteById(int $modelId)
+    {
+        $marca = $this->getById($modelId);
+
+        $marca->delete();
+    }
 }

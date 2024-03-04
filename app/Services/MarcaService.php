@@ -58,4 +58,13 @@ class MarcaService
              throw new Exception($th->getMessage(), $th->getCode());
          }
     }
+
+    public function deletaMarcaPorId(int $id)
+    {
+        try {
+            $this->marcaInterface->deleteById($id);
+        } catch (\Throwable $th) {
+            throw new Exception($th->getMessage(), $th->getCode());
+        }
+    }
 }

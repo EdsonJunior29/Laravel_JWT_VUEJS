@@ -88,8 +88,13 @@ class MarcaController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marca $marca)
-    {
-        //
+    public function destroy(int $marcaId)
+    {   
+        try {
+            $this->marcaService->deletaMarcaPorId($marcaId);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), $e->getCode());
+        }
+        return response()->json('delete successfully', 204);
     }
 }

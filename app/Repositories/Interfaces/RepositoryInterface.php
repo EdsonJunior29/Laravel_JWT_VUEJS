@@ -13,4 +13,6 @@ interface RepositoryInterface
     public function getById(int $modelId);
 
     public function updateById(array $dados, int $modelId);
+
+    public function deleteById(int $modelId);
 }
