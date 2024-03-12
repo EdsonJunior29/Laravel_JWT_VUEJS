@@ -27,8 +27,8 @@ class UpdateMarcaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required','string','max:30'],
-            'imagem' => ['required','string','max:100']
+            'nome' => 'required|unique:marcas,nome,'.$this->id.'|string|max:30',
+            'imagem' => 'required|string|max:100'
         ];
     }
     
