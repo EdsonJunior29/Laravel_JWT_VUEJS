@@ -28,7 +28,7 @@ class StoreMarcaRequest extends FormRequest
     {
         return [
             'nome' => ['required','unique:marcas,nome','string','max:30'],
-            'imagem' => ['required','string','max:100']
+            'imagem' => ['required','image','max:100']
         ];
     }
 

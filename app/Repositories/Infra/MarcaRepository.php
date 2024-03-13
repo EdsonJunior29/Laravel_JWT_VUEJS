@@ -26,6 +26,7 @@ class MarcaRepository implements MarcaInterface
 
     public function create(array $dados): Marca
     {
+        $dados['imagem']->store('imagens');
         return $this->marca->create($dados);
     }
 
