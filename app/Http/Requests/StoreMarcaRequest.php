@@ -29,6 +29,7 @@ class StoreMarcaRequest extends FormRequest
         return [
             'nome' => ['required','unique:marcas,nome','string','max:30'],
             'imagem' => ['required','image','max:100']
+            // Posso utilizar o mimes:docx para informa qual extensão e permitida nesse campo.
         ];
     }
 
